@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materials Encyclopedia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Materials Encyclopedia</h1>
+    <p>Build a flexible database of compounds, elements, minerals, rocks, and custom materials.</p>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <h2>Property Definitions</h2>
+      <form id="propertyForm" class="stack">
+        <div class="row">
+          <label for="propertyName">Property name</label>
+          <input id="propertyName" name="propertyName" type="text" required placeholder="Density">
+        </div>
+        <div class="row">
+          <label for="propertyType">Type</label>
+          <select id="propertyType" name="propertyType" required>
+            <option value="number">Numeric</option>
+            <option value="category">Category (single value)</option>
+            <option value="tags">Tags (multiple values)</option>
+            <option value="text">Text</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="propertyUnit">Unit (optional)</label>
+          <input id="propertyUnit" name="propertyUnit" type="text" placeholder="g/cm^3">
+        </div>
+        <button type="submit">Add Property</button>
+      </form>
+      <div id="propertyList" class="list"></div>
+    </section>
+
+    <section class="card">
+      <h2>Add Material</h2>
+      <form id="materialForm" class="stack">
+        <div class="row">
+          <label for="materialName">Name</label>
+          <input id="materialName" name="materialName" type="text" required placeholder="Quartz">
+        </div>
+        <div class="row">
+          <label for="materialKind">Kind</label>
+          <select id="materialKind" name="materialKind">
+            <option>Compound</option>
+            <option>Element</option>
+            <option>Mineral</option>
+            <option>Rock</option>
+            <option>Custom</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="materialNotes">Notes</label>
+          <textarea id="materialNotes" name="materialNotes" rows="2" placeholder="Optional notes"></textarea>
+        </div>
+        <fieldset>
+          <legend>Property Values</legend>
+          <div id="materialPropertiesContainer" class="stack"></div>
+        </fieldset>
+        <button type="submit">Add Material</button>
+      </form>
+    </section>
+
+    <section class="card wide">
+      <h2>Materials</h2>
+      <div class="toolbar">
+        <button id="exportBtn" type="button">Export JSON</button>
+        <label class="file-input">
+          Import JSON
+          <input id="importInput" type="file" accept=".json,application/json">
+        </label>
+        <button id="clearBtn" type="button" class="danger">Clear All</button>
+      </div>
+      <div id="materialsTableContainer"></div>
+    </section>
+
+    <section class="card wide">
+      <h2>Analytics</h2>
+      <div id="analyticsContainer" class="stack"></div>
+    </section>
+  </main>
+
+  <template id="propertyValueTemplate">
+    <div class="row property-value-row">
+      <label></label>
+      <div class="value-input"></div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

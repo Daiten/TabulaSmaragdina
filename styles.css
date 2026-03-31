@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #1e293b;
+}
+
+.page-header {
+  padding: 1rem 1.25rem;
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.page-header h1 {
+  margin: 0 0 0.25rem 0;
+}
+
+.page-header p {
+  margin: 0;
+  opacity: 0.95;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dbe1ea;
+  padding: 1rem;
+}
+
+.card.wide {
+  grid-column: 1 / -1;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+}
+
+button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.55rem 0.8rem;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.95);
+}
+
+button.danger {
+  background: #dc2626;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.file-input {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.8rem;
+  border-radius: 6px;
+  background: #0f766e;
+  color: #fff;
+  cursor: pointer;
+}
+
+.file-input input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.list-item {
+  border: 1px solid #dbe1ea;
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.45rem;
+}
+
+.tag-pill {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  margin: 0 0.15rem 0.15rem 0;
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 0.8rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  border: 1px solid #dbe1ea;
+  padding: 0.45rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eff6ff;
+}
+
+.muted {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.analytics-block {
+  border: 1px solid #dbe1ea;
+  border-radius: 8px;
+  padding: 0.7rem;
+}
+
+.analytics-block h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

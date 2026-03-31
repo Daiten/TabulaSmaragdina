@@ -1,0 +1,31 @@
+{
+  "exportedAt": "2026-03-31T21:27:03.237Z",
+  "version": 1,
+  "properties": [
+    {
+      "id": "545e0946-b49e-408b-b63e-0f5c617c4bc2",
+      "name": "Atomic Number",
+      "type": "number",
+      "unit": ""
+    },
+    {
+      "id": "1d9b77aa-f213-475c-8706-ab6aac08484a",
+      "name": "Molar Mass",
+      "type": "number",
+      "unit": "g/mol"
+    },
+    {
+      "id": "8c3e81b0-3471-4d9c-b522-38fb14844ca9",
+      "name": "Element Group",
+      "type": "number",
+      "unit": ""
+    },
+    {
+      "id": "59169586-7d20-4766-b126-09232596e5cf",
+      "name": "Element Period",
+      "type": "number",
+      "unit": ""
+    }
+  ],
+  "materials": []
+}
