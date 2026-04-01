@@ -1,7 +1,6 @@
 const STORAGE_KEY = "materials-encyclopedia-db-v1";
 
 const state = loadState();
-let editingMaterialId = null;
 
 const propertyForm = document.getElementById("propertyForm");
 const propertyList = document.getElementById("propertyList");
@@ -14,15 +13,21 @@ const importInput = document.getElementById("importInput");
 const clearBtn = document.getElementById("clearBtn");
 const propertyValueTemplate = document.getElementById("propertyValueTemplate");
 
+// ── Modal elements (add these to your HTML if not present) ──────────────────
+// The script will create them dynamically if missing.
+let editModal = null;
+let editModalBackdrop = null;
+
 propertyForm.addEventListener("submit", onAddProperty);
 materialForm.addEventListener("submit", onAddMaterial);
 exportBtn.addEventListener("click", onExport);
 importInput.addEventListener("change", onImport);
 clearBtn.addEventListener("click", onClearAll);
 
+ensureModalInDOM();
 render();
 
-/* ---------------- STATE ---------------- */
+// ── State persistence ────────────────────────────────────────────────────────
 
 function loadState() {
   try {
@@ -48,7 +53,7 @@ function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-/* ---------------- PROPERTIES ---------------- */
+// ── Add handlers ─────────────────────────────────────────────────────────────
 
 function onAddProperty(event) {
   event.preventDefault();
@@ -77,46 +82,6 @@ function onAddProperty(event) {
   render();
 }
 
-function removeProperty(propertyId) {
-  state.properties = state.properties.filter((p) => p.id !== propertyId);
-  for (const material of state.materials) {
-    delete material.values[propertyId];
-  }
-  saveState();
-  render();
-}
-
-/* ---------------- MATERIALS (ADD + EDIT) ---------------- */
-
-function startEditMaterial(id) {
-  const material = state.materials.find((m) => m.id === id);
-  if (!material) return;
-
-  editingMaterialId = id;
-
-  materialForm.querySelector("[name='materialName']").value = material.name;
-  materialForm.querySelector("[name='materialKind']").value = material.kind;
-  materialForm.querySelector("[name='materialNotes']").value = material.notes;
-
-  for (const prop of state.properties) {
-    const input = materialForm.querySelector(`[name='prop-${prop.id}']`);
-    const val = material.values[prop.id];
-
-    if (!input) continue;
-
-    if (Array.isArray(val)) {
-      input.value = val.join(", ");
-    } else if (val == null) {
-      input.value = "";
-    } else {
-      input.value = val;
-    }
-  }
-
-  const submitBtn = materialForm.querySelector("button[type='submit']");
-  if (submitBtn) submitBtn.textContent = "Save Changes";
-}
-
 function onAddMaterial(event) {
   event.preventDefault();
   const formData = new FormData(materialForm);
@@ -128,51 +93,47 @@ function onAddMaterial(event) {
     return;
   }
 
-  const values = {};
-  for (const prop of state.properties) {
-    const raw = String(formData.get(`prop-${prop.id}`) || "").trim();
-    if (prop.type === "number") {
-      values[prop.id] = raw === "" ? null : Number(raw);
-    } else if (prop.type === "category") {
-      values[prop.id] = raw || null;
-    } else if (prop.type === "tags") {
-      const tags = raw
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean);
-      values[prop.id] = tags;
-    } else {
-      values[prop.id] = raw || null;
-    }
-  }
+  const values = collectPropertyValues(formData);
 
-  if (editingMaterialId) {
-    const m = state.materials.find((m) => m.id === editingMaterialId);
-    if (m) {
-      m.name = name;
-      m.kind = kind;
-      m.notes = notes;
-      m.values = values;
-    }
-    editingMaterialId = null;
-    const submitBtn = materialForm.querySelector("button[type='submit']");
-    if (submitBtn) submitBtn.textContent = "Add Material";
-  } else {
-    state.materials.push({
-      id: crypto.randomUUID(),
-      name,
-      kind,
-      notes,
-      values
-    });
-  }
+  state.materials.push({
+    id: crypto.randomUUID(),
+    name,
+    kind,
+    notes,
+    values
+  });
 
   materialForm.reset();
   saveState();
   render();
 }
 
-/* ---------------- IMPORT / EXPORT / CLEAR ---------------- */
+/** Read all prop-* fields from a FormData and return a values map. */
+function collectPropertyValues(formData) {
+  const values = {};
+  for (const prop of state.properties) {
+    if (prop.type === "number") {
+      const raw = String(formData.get(`prop-${prop.id}`) || "").trim();
+      values[prop.id] = raw === "" ? null : Number(raw);
+    } else if (prop.type === "category") {
+      const raw = String(formData.get(`prop-${prop.id}`) || "").trim();
+      values[prop.id] = raw || null;
+    } else if (prop.type === "tags") {
+      const raw = String(formData.get(`prop-${prop.id}`) || "").trim();
+      const tags = raw
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+      values[prop.id] = tags;
+    } else {
+      const raw = String(formData.get(`prop-${prop.id}`) || "").trim();
+      values[prop.id] = raw || null;
+    }
+  }
+  return values;
+}
+
+// ── Export / Import / Clear ──────────────────────────────────────────────────
 
 function onExport() {
   const payload = {
@@ -223,7 +184,7 @@ function onClearAll() {
   render();
 }
 
-/* ---------------- RENDERING ---------------- */
+// ── Render ───────────────────────────────────────────────────────────────────
 
 function render() {
   renderPropertyList();
@@ -244,10 +205,20 @@ function renderPropertyList() {
     item.className = "list-item";
     item.innerHTML = `
       <span><strong>${escapeHtml(prop.name)}</strong> (${escapeHtml(prop.type)}${prop.unit ? ", " + escapeHtml(prop.unit) : ""})</span>
-      <button type="button" data-property-remove="${prop.id}" class="danger">Remove</button>
+      <div style="display:flex;gap:6px;">
+        <button type="button" data-property-edit="${prop.id}">Edit</button>
+        <button type="button" data-property-remove="${prop.id}" class="danger">Remove</button>
+      </div>
     `;
     propertyList.appendChild(item);
   }
+
+  propertyList.querySelectorAll("[data-property-edit]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-property-edit");
+      openEditPropertyModal(id);
+    });
+  });
 
   propertyList.querySelectorAll("[data-property-remove]").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -255,6 +226,15 @@ function renderPropertyList() {
       removeProperty(id);
     });
   });
+}
+
+function removeProperty(propertyId) {
+  state.properties = state.properties.filter((p) => p.id !== propertyId);
+  for (const material of state.materials) {
+    delete material.values[propertyId];
+  }
+  saveState();
+  render();
 }
 
 function renderMaterialPropertyInputs() {
@@ -271,25 +251,34 @@ function renderMaterialPropertyInputs() {
     const valueInput = row.querySelector(".value-input");
     label.textContent = `${prop.name}${prop.unit ? ` (${prop.unit})` : ""}`;
 
-    let input;
-    if (prop.type === "number") {
-      input = document.createElement("input");
-      input.type = "number";
-      input.step = "any";
-      input.placeholder = "Numeric value";
-    } else if (prop.type === "tags") {
-      input = document.createElement("input");
-      input.type = "text";
-      input.placeholder = "Comma-separated tags, e.g. sweet, sour";
-    } else {
-      input = document.createElement("input");
-      input.type = "text";
-      input.placeholder = prop.type === "category" ? "Category value" : "Text value";
-    }
-    input.name = `prop-${prop.id}`;
+    const input = buildPropertyInput(prop);
     valueInput.appendChild(input);
     materialPropertiesContainer.appendChild(clone);
   }
+}
+
+/** Build the right <input> element for a property type. */
+function buildPropertyInput(prop, existingValue) {
+  let input;
+  if (prop.type === "number") {
+    input = document.createElement("input");
+    input.type = "number";
+    input.step = "any";
+    input.placeholder = "Numeric value";
+    if (existingValue != null) input.value = existingValue;
+  } else if (prop.type === "tags") {
+    input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Comma-separated tags, e.g. sweet, sour";
+    if (Array.isArray(existingValue)) input.value = existingValue.join(", ");
+  } else {
+    input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = prop.type === "category" ? "Category value" : "Text value";
+    if (existingValue != null) input.value = existingValue;
+  }
+  input.name = `prop-${prop.id}`;
+  return input;
 }
 
 function renderMaterialsTable() {
@@ -330,14 +319,13 @@ function renderMaterialsTable() {
     tr.appendChild(cell(material.notes || "—"));
 
     const actionTd = document.createElement("td");
+    actionTd.style.display = "flex";
+    actionTd.style.gap = "6px";
 
     const editBtn = document.createElement("button");
     editBtn.type = "button";
     editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", () => {
-      startEditMaterial(material.id);
-    });
-    actionTd.appendChild(editBtn);
+    editBtn.addEventListener("click", () => openEditMaterialModal(material.id));
 
     const delBtn = document.createElement("button");
     delBtn.type = "button";
@@ -348,9 +336,11 @@ function renderMaterialsTable() {
       saveState();
       render();
     });
-    actionTd.appendChild(delBtn);
 
+    actionTd.appendChild(editBtn);
+    actionTd.appendChild(delBtn);
     tr.appendChild(actionTd);
+
     tbody.appendChild(tr);
   });
   table.appendChild(tbody);
@@ -358,7 +348,275 @@ function renderMaterialsTable() {
   materialsTableContainer.appendChild(table);
 }
 
-/* ---------------- ANALYTICS ---------------- */
+// ── Edit Modal ───────────────────────────────────────────────────────────────
+
+function ensureModalInDOM() {
+  if (document.getElementById("editModal")) {
+    editModal = document.getElementById("editModal");
+    editModalBackdrop = document.getElementById("editModalBackdrop");
+    return;
+  }
+
+  // Inject minimal modal styles
+  const style = document.createElement("style");
+  style.textContent = `
+    #editModalBackdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    #editModalBackdrop.open { display: flex; }
+    #editModal {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px 28px;
+      min-width: 340px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    #editModal h2 { margin: 0 0 16px; font-size: 1.1rem; }
+    #editModal label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.9rem; }
+    #editModal input, #editModal textarea { width: 100%; box-sizing: border-box; margin-bottom: 12px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95rem; }
+    #editModal .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+  `;
+  document.head.appendChild(style);
+
+  editModalBackdrop = document.createElement("div");
+  editModalBackdrop.id = "editModalBackdrop";
+
+  editModal = document.createElement("div");
+  editModal.id = "editModal";
+  editModal.setAttribute("role", "dialog");
+  editModal.setAttribute("aria-modal", "true");
+
+  editModalBackdrop.appendChild(editModal);
+  document.body.appendChild(editModalBackdrop);
+
+  // Close on backdrop click
+  editModalBackdrop.addEventListener("click", (e) => {
+    if (e.target === editModalBackdrop) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+}
+
+function openModal(contentBuilder) {
+  editModal.innerHTML = "";
+  contentBuilder(editModal);
+  editModalBackdrop.classList.add("open");
+  // Focus first input
+  const first = editModal.querySelector("input, textarea, select");
+  if (first) first.focus();
+}
+
+function closeModal() {
+  editModalBackdrop.classList.remove("open");
+  editModal.innerHTML = "";
+}
+
+// ── Edit Property Modal ──────────────────────────────────────────────────────
+
+function openEditPropertyModal(propertyId) {
+  const prop = state.properties.find((p) => p.id === propertyId);
+  if (!prop) return;
+
+  openModal((container) => {
+    const h2 = document.createElement("h2");
+    h2.textContent = "Edit Property";
+    container.appendChild(h2);
+
+    // Name
+    const nameLabel = document.createElement("label");
+    nameLabel.textContent = "Name";
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.value = prop.name;
+
+    // Type
+    const typeLabel = document.createElement("label");
+    typeLabel.textContent = "Type";
+    const typeSelect = document.createElement("select");
+    typeSelect.style.cssText = "width:100%;margin-bottom:12px;padding:6px 8px;border:1px solid #ccc;border-radius:4px;font-size:0.95rem;box-sizing:border-box;";
+    ["number", "text", "category", "tags"].forEach((t) => {
+      const opt = document.createElement("option");
+      opt.value = t;
+      opt.textContent = t;
+      if (t === prop.type) opt.selected = true;
+      typeSelect.appendChild(opt);
+    });
+
+    // Unit
+    const unitLabel = document.createElement("label");
+    unitLabel.textContent = "Unit (optional)";
+    const unitInput = document.createElement("input");
+    unitInput.type = "text";
+    unitInput.value = prop.unit || "";
+
+    container.appendChild(nameLabel);
+    container.appendChild(nameInput);
+    container.appendChild(typeLabel);
+    container.appendChild(typeSelect);
+    container.appendChild(unitLabel);
+    container.appendChild(unitInput);
+
+    // Actions
+    const actions = document.createElement("div");
+    actions.className = "modal-actions";
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.type = "button";
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.addEventListener("click", closeModal);
+
+    const saveBtn = document.createElement("button");
+    saveBtn.type = "button";
+    saveBtn.textContent = "Save";
+    saveBtn.addEventListener("click", () => {
+      const newName = nameInput.value.trim();
+      const newType = typeSelect.value;
+      const newUnit = unitInput.value.trim();
+
+      if (!newName) {
+        alert("Name cannot be empty.");
+        return;
+      }
+      // Check for duplicate name (excluding itself)
+      if (state.properties.some((p) => p.id !== propertyId && p.name.toLowerCase() === newName.toLowerCase())) {
+        alert("Another property with that name already exists.");
+        return;
+      }
+
+      prop.name = newName;
+      prop.type = newType;
+      prop.unit = newUnit;
+
+      saveState();
+      render();
+      closeModal();
+    });
+
+    actions.appendChild(cancelBtn);
+    actions.appendChild(saveBtn);
+    container.appendChild(actions);
+  });
+}
+
+// ── Edit Material Modal ──────────────────────────────────────────────────────
+
+function openEditMaterialModal(materialId) {
+  const material = state.materials.find((m) => m.id === materialId);
+  if (!material) return;
+
+  openModal((container) => {
+    const h2 = document.createElement("h2");
+    h2.textContent = `Edit Material: ${escapeHtml(material.name)}`;
+    container.appendChild(h2);
+
+    // Name
+    const nameLabel = document.createElement("label");
+    nameLabel.textContent = "Name";
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.value = material.name;
+
+    // Kind
+    const kindLabel = document.createElement("label");
+    kindLabel.textContent = "Kind";
+    const kindInput = document.createElement("input");
+    kindInput.type = "text";
+    kindInput.value = material.kind || "";
+
+    // Notes
+    const notesLabel = document.createElement("label");
+    notesLabel.textContent = "Notes";
+    const notesInput = document.createElement("textarea");
+    notesInput.rows = 3;
+    notesInput.style.cssText = "width:100%;box-sizing:border-box;margin-bottom:12px;padding:6px 8px;border:1px solid #ccc;border-radius:4px;font-size:0.95rem;";
+    notesInput.value = material.notes || "";
+
+    container.appendChild(nameLabel);
+    container.appendChild(nameInput);
+    container.appendChild(kindLabel);
+    container.appendChild(kindInput);
+    container.appendChild(notesLabel);
+    container.appendChild(notesInput);
+
+    // Property values
+    if (state.properties.length > 0) {
+      const propsHeading = document.createElement("label");
+      propsHeading.textContent = "Property Values";
+      propsHeading.style.marginTop = "4px";
+      container.appendChild(propsHeading);
+
+      for (const prop of state.properties) {
+        const propLabel = document.createElement("label");
+        propLabel.textContent = `${prop.name}${prop.unit ? ` (${prop.unit})` : ""}`;
+        propLabel.style.fontWeight = "normal";
+        const propInput = buildPropertyInput(prop, material.values[prop.id]);
+        container.appendChild(propLabel);
+        container.appendChild(propInput);
+      }
+    }
+
+    // Actions
+    const actions = document.createElement("div");
+    actions.className = "modal-actions";
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.type = "button";
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.addEventListener("click", closeModal);
+
+    const saveBtn = document.createElement("button");
+    saveBtn.type = "button";
+    saveBtn.textContent = "Save";
+    saveBtn.addEventListener("click", () => {
+      const newName = nameInput.value.trim();
+      if (!newName) {
+        alert("Name cannot be empty.");
+        return;
+      }
+
+      material.name = newName;
+      material.kind = kindInput.value.trim() || "Custom";
+      material.notes = notesInput.value.trim();
+
+      // Collect property values from the modal inputs
+      for (const prop of state.properties) {
+        const input = container.querySelector(`[name="prop-${prop.id}"]`);
+        if (!input) continue;
+        const raw = input.value.trim();
+        if (prop.type === "number") {
+          material.values[prop.id] = raw === "" ? null : Number(raw);
+        } else if (prop.type === "tags") {
+          material.values[prop.id] = raw.split(",").map((t) => t.trim()).filter(Boolean);
+        } else {
+          material.values[prop.id] = raw || null;
+        }
+      }
+
+      saveState();
+      render();
+      closeModal();
+    });
+
+    actions.appendChild(cancelBtn);
+    actions.appendChild(saveBtn);
+    container.appendChild(actions);
+  });
+}
+
+// ── Analytics ────────────────────────────────────────────────────────────────
 
 function renderAnalytics() {
   analyticsContainer.innerHTML = "";
@@ -480,9 +738,7 @@ function renderLikelyTagRules(tagProperties) {
   const lines = [];
   for (const tagProp of tagProperties) {
     const allTags = collectAllTags(tagProp.id);
-    const predictors = state.properties.filter(
-      (p) => p.id !== tagProp.id && (p.type === "category" || p.type === "text")
-    );
+    const predictors = state.properties.filter((p) => p.id !== tagProp.id && (p.type === "category" || p.type === "text"));
     for (const predictor of predictors) {
       for (const tag of allTags) {
         const grouped = computeConditionalTagRate(tagProp.id, tag, predictor.id);
@@ -493,9 +749,7 @@ function renderLikelyTagRules(tagProperties) {
           const rate = rates.hit / rates.total;
           if (rate >= 0.7) {
             lines.push(
-              `When ${predictor.name} = ${predictorValue}, tag "${tag}" appears ${Math.round(
-                rate * 100
-              )}% of the time (n=${rates.total}).`
+              `When ${predictor.name} = ${predictorValue}, tag "${tag}" appears ${Math.round(rate * 100)}% of the time (n=${rates.total}).`
             );
           }
         }
@@ -518,7 +772,7 @@ function renderLikelyTagRules(tagProperties) {
   analyticsContainer.appendChild(block);
 }
 
-/* ---------------- HELPERS ---------------- */
+// ── Utilities ────────────────────────────────────────────────────────────────
 
 function collectAllTags(propertyId) {
   const set = new Set();
