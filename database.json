@@ -1,31 +1,513 @@
 {
-  "exportedAt": "2026-03-31T21:27:03.237Z",
+  "exportedAt": "2026-04-01T13:36:27.367Z",
   "version": 1,
   "properties": [
     {
-      "id": "545e0946-b49e-408b-b63e-0f5c617c4bc2",
-      "name": "Atomic Number",
-      "type": "number",
+      "id": "4bfbf690-7053-4263-bd03-dc0cffb81182",
+      "name": "Formula",
+      "type": "text",
       "unit": ""
     },
     {
-      "id": "1d9b77aa-f213-475c-8706-ab6aac08484a",
+      "id": "61565068-d4c6-4ff0-abe1-4e658102aa90",
       "name": "Molar Mass",
       "type": "number",
       "unit": "g/mol"
     },
     {
-      "id": "8c3e81b0-3471-4d9c-b522-38fb14844ca9",
-      "name": "Element Group",
+      "id": "966e493f-ec4b-461c-a326-7750cb95c9fe",
+      "name": "Atomic Number",
       "type": "number",
       "unit": ""
     },
     {
-      "id": "59169586-7d20-4766-b126-09232596e5cf",
+      "id": "d0efe208-4162-48c9-82b9-af96afa8714b",
+      "name": "Element Group",
+      "type": "category",
+      "unit": ""
+    },
+    {
+      "id": "5ea47f21-037c-4aca-bd4e-3291d715ac4e",
+      "name": "Color",
+      "type": "tags",
+      "unit": ""
+    },
+    {
+      "id": "26597511-51a4-40b9-8694-dcd287256d6e",
       "name": "Element Period",
+      "type": "category",
+      "unit": ""
+    },
+    {
+      "id": "f0f6cf79-ddba-46ec-a05c-650320eab8d1",
+      "name": "Element Block",
+      "type": "category",
+      "unit": ""
+    },
+    {
+      "id": "b8e0e660-f889-4f27-aa3e-cfb503fff127",
+      "name": "STP Phase",
+      "type": "category",
+      "unit": ""
+    },
+    {
+      "id": "3fc9b149-8734-4110-8a15-24846596195a",
+      "name": "Electrons per Shell",
       "type": "number",
       "unit": ""
+    },
+    {
+      "id": "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65",
+      "name": "Boiling Point",
+      "type": "number",
+      "unit": "°C"
     }
   ],
-  "materials": []
+  "materials": [
+    {
+      "id": "c8369c85-fa43-41b3-a12b-0067ad4b5eaf",
+      "name": "Dihydrogen",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "H2",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 2.016,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": 1,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": "1",
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "colorless"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": "1",
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": "s-block",
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "0fd56555-d9f9-4915-bebb-68e5d48af554",
+      "name": "Helium",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "He",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 4.0026,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": 2,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": "18",
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "colorless"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": "1",
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": "s-block",
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": "gas",
+        "3fc9b149-8734-4110-8a15-24846596195a": 2,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": -268.928
+      }
+    },
+    {
+      "id": "35363131-1ff1-4989-853a-29b79a94f025",
+      "name": "Lithium",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "Li",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 6.94,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": 3,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": "1",
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "grey",
+          "white"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": "2",
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": "s-block",
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": "solid",
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "0a8f6309-61bb-4034-8680-72c80468cc24",
+      "name": "Water",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "H2O",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 18.01528,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "colorless"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": "liquid",
+        "3fc9b149-8734-4110-8a15-24846596195a": null
+      }
+    },
+    {
+      "id": "7e101c6c-d0b9-4480-b6ad-63de6937e66f",
+      "name": "Ammonia",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "NH3",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 17.03,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "colorless"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null
+      }
+    },
+    {
+      "id": "0f69540c-1a61-400c-a8fc-c9f8049c1144",
+      "name": "Beryllium",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "Be",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 9.0122,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": 4,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "grey",
+          "white"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null
+      }
+    },
+    {
+      "id": "5946fc83-d639-458c-bfd4-839733fc3e08",
+      "name": "Carbon Dioxide",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "CO2",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 44.009,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null
+      }
+    },
+    {
+      "id": "1278f7ba-53eb-4d35-8298-780b0aa2d398",
+      "name": "Boron",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "B",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 10.81,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": 5,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": "13",
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "black",
+          "brown"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": "2",
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "b1eebbd8-d6d7-4ed4-a4a7-b18b7665dd05",
+      "name": "Graphite",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "C",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 12.011,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null
+      }
+    },
+    {
+      "id": "a5058826-5b1e-41b8-b165-b45151b15ce6",
+      "name": "Glucose",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "C6H12O6",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 180.16,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "colorless"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "b719b27f-518e-4869-a3a7-1eba101654ae",
+      "name": "Sulfuric Acid",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "H2SO4",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 98.08,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "colorless"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": "liquid",
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "f1c2629b-b413-4e3c-905d-63af534b8242",
+      "name": "Ascorbic Acid",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "C6H8O6",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "0758833e-3dca-4ab9-80a0-89975d7d1fe9",
+      "name": "Dinitrogen",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "N2",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 28.014,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": 7,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "e15f2fe0-931b-4b30-ae06-3873d8e1dc2d",
+      "name": "Caffeine",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": null,
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null
+      }
+    },
+    {
+      "id": "c73a646c-4218-439f-9fe4-ea43f5b18dc5",
+      "name": "Glycerol",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "C3H8O3",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 92.09382,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [
+          "colorless"
+        ],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "d2d45396-d19f-405e-90d5-26c2e0891882",
+      "name": "Dioxygen",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "O2",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "7ba77924-9bee-449a-8d02-06d01d6800b8",
+      "name": "Difluorine",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": null,
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "d47c3a5f-ce92-43fc-90fb-db06fa85303d",
+      "name": "Neon",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "Ne",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 20.1797,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "3b37e681-347f-4b4c-b2e7-d38c06ef27be",
+      "name": "Sodium",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "Na",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": 22.989769,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "86426244-32ce-4614-a505-cf5699d118d3",
+      "name": "Magnesium",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": "Mg",
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "efca1cd5-0adf-4013-86ca-d60010f3cc79",
+      "name": "Calcium Carbonate",
+      "kind": "Compound",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": null,
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "b5b85d73-fa70-4826-a568-6db6dc8f9b25",
+      "name": "Aluminium",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": null,
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "3f4fb6d7-dbd4-4eb2-a88c-af9290640eb5",
+      "name": "Silicon",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": null,
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    },
+    {
+      "id": "5b1daaf3-6ebe-4720-948f-c86dde863903",
+      "name": "White Phosphorous",
+      "kind": "Element",
+      "notes": "",
+      "values": {
+        "4bfbf690-7053-4263-bd03-dc0cffb81182": null,
+        "61565068-d4c6-4ff0-abe1-4e658102aa90": null,
+        "966e493f-ec4b-461c-a326-7750cb95c9fe": null,
+        "d0efe208-4162-48c9-82b9-af96afa8714b": null,
+        "5ea47f21-037c-4aca-bd4e-3291d715ac4e": [],
+        "26597511-51a4-40b9-8694-dcd287256d6e": null,
+        "f0f6cf79-ddba-46ec-a05c-650320eab8d1": null,
+        "b8e0e660-f889-4f27-aa3e-cfb503fff127": null,
+        "3fc9b149-8734-4110-8a15-24846596195a": null,
+        "d73e0d9f-ee7e-4c8b-84b6-2c42cf0f4d65": null
+      }
+    }
+  ]
 }
